@@ -1,53 +1,27 @@
-//Finding the Pivot Element.
+//Modification in Finding the Pivot Element.
 #include<iostream>
 using namespace std;
-
-void readArray(int nums[], int size){
-    for(int i = 0; i < size; i++){
-        cin >> nums[i];
-    }
-}
-
-int findPivot(int nums[], int size, int target){
-    int low=0;
-int high= size-1;
-int mid=low+(high-low)/2;
-
-    while(low <= high){
-        if(nums[mid] == target)
-            return mid;
-        
-        
-        else if(nums[low] <= nums[mid]){
-            if(nums[low] <= target && nums[mid] > target)
-                high=mid-1;
-            else
-                low=mid+1;
+int pivot(int arr[],int n) {
+    int s = 0;
+    int e = n-1;
+    while(s<=e) {
+        int mid=s+(e-s)/2;
+        if(arr[mid]>=arr[0]) {
+            s=mid+1;
         }
-        
-        else if(nums[mid] <= nums[high]){
-            if(nums[mid] < target && nums[high] >= target){
-                low=mid+1;
-            }
-            else
-                high=mid-1;
+        else {
+            e=mid;
         }
-        
-        mid=low+(high-low)/2;
     }
-    return -1;
+    return s;
+}
+int main() {
+    int n;
+    cin >> n;
+    int arr[n];
+    for(int i=0;i<n;i++) {
+        cin >> arr[i];
+    }
+     cout << pivot(arr,n) << endl;
 }
 
-int main(){
-    int size, target;
-    cin >> size;
-    int nums[size];
-    cout << "Enter the element : " << endl;
-    readArray(nums, size);
-    cout << "Enter the Target : " << endl;
-    cin >> target;
-
-    cout << "Pivot Element index is: " << findPivot(nums, size, target) << endl;
-
-
-}
